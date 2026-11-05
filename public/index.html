@@ -1,0 +1,902 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#101827">
+  <meta name="description" content="HomeProof helps homeowners and renters organize their belongings, receipts, photographs and household insurance records in one place.">
+  <title>HomeProof - Know What You Own</title>
+
+  <style>
+    :root {
+      --dark: #101827;
+      --navy: #17243a;
+      --blue: #3867f5;
+      --light: #f5f7fb;
+      --text: #253047;
+      --muted: #718096;
+      --white: #ffffff;
+      --border: #e4e9f1;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      background: var(--white);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    button, a {
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .container {
+      width: 90%;
+      max-width: 1120px;
+      margin: auto;
+    }
+
+    header {
+      background: var(--white);
+      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+
+    nav {
+      min-height: 72px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 15px;
+    }
+
+    .logo {
+      font-size: 23px;
+      font-weight: 800;
+      color: var(--dark);
+      letter-spacing: -1px;
+    }
+
+    .logo span {
+      color: var(--blue);
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 25px;
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    .nav-links a:hover {
+      color: var(--blue);
+    }
+
+    .nav-login {
+      padding: 10px 18px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+    }
+
+    .hero {
+      background: var(--dark);
+      color: white;
+      padding: 95px 0 85px;
+      overflow: hidden;
+    }
+
+    .hero-content {
+      max-width: 760px;
+      margin: auto;
+      text-align: center;
+    }
+
+    .eyebrow {
+      display: inline-block;
+      padding: 7px 14px;
+      border-radius: 30px;
+      background: rgba(75, 117, 255, 0.16);
+      color: #a9bcff;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      margin-bottom: 22px;
+    }
+
+    .hero h1 {
+      font-size: clamp(38px, 7vw, 66px);
+      line-height: 1.12;
+      letter-spacing: -2px;
+      margin-bottom: 22px;
+    }
+
+    .hero h1 span {
+      color: #7fa0ff;
+    }
+
+    .hero p {
+      max-width: 620px;
+      margin: auto;
+      color: #c3ccdc;
+      font-size: 17px;
+    }
+
+    .hero-buttons {
+      margin-top: 32px;
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 14px 23px;
+      border-radius: 9px;
+      font-weight: 700;
+      font-size: 14px;
+      transition: 0.2s;
+      text-align: center;
+    }
+
+    .btn-primary {
+      background: var(--blue);
+      color: white;
+    }
+
+    .btn-primary:hover {
+      background: #2853dc;
+      transform: translateY(-2px);
+    }
+
+    .btn-outline {
+      border: 1px solid #526078;
+      color: white;
+    }
+
+    .btn-outline:hover {
+      background: #26344c;
+    }
+
+    .trust-line {
+      margin-top: 24px;
+      color: #aebbd0;
+      font-size: 12px;
+    }
+
+    .section {
+      padding: 80px 0;
+    }
+
+    .section-heading {
+      text-align: center;
+      max-width: 650px;
+      margin: 0 auto 42px;
+    }
+
+    .section-heading h2 {
+      font-size: clamp(27px, 4vw, 39px);
+      color: var(--dark);
+      letter-spacing: -1px;
+      margin-bottom: 12px;
+    }
+
+    .section-heading p {
+      color: var(--muted);
+      font-size: 15px;
+    }
+
+    .dashboard-preview {
+      background: var(--light);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 24px;
+      max-width: 850px;
+      margin: 0 auto;
+      box-shadow: 0 15px 50px rgba(20, 35, 60, 0.07);
+    }
+
+    .preview-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 23px;
+    }
+
+    .preview-top h3 {
+      color: var(--dark);
+      font-size: 19px;
+    }
+
+    .preview-status {
+      background: #e4f5e9;
+      color: #18713b;
+      padding: 6px 10px;
+      border-radius: 20px;
+      font-size: 11px;
+      font-weight: 700;
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 13px;
+    }
+
+    .stat {
+      background: white;
+      padding: 19px;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+    }
+
+    .stat small {
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .stat strong {
+      display: block;
+      font-size: 23px;
+      color: var(--dark);
+      margin-top: 5px;
+    }
+
+    .preview-note {
+      margin-top: 16px;
+      color: var(--muted);
+      font-size: 11px;
+    }
+
+    .features {
+      background: var(--light);
+    }
+
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .feature {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 13px;
+      padding: 25px;
+    }
+
+    .feature-icon {
+      width: 45px;
+      height: 45px;
+      background: #edf1ff;
+      border-radius: 11px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 21px;
+      margin-bottom: 17px;
+    }
+
+    .feature h3 {
+      color: var(--dark);
+      font-size: 17px;
+      margin-bottom: 9px;
+    }
+
+    .feature p {
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 25px;
+    }
+
+    .step {
+      text-align: center;
+      padding: 20px;
+    }
+
+    .step-number {
+      width: 42px;
+      height: 42px;
+      margin: 0 auto 16px;
+      border-radius: 50%;
+      background: #eaf0ff;
+      color: var(--blue);
+      display: grid;
+      place-items: center;
+      font-weight: 800;
+    }
+
+    .step h3 {
+      margin-bottom: 8px;
+      color: var(--dark);
+    }
+
+    .step p {
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .pricing {
+      background: var(--light);
+    }
+
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 22px;
+      max-width: 760px;
+      margin: auto;
+    }
+
+    .price-card {
+      background: white;
+      border: 1px solid var(--border);
+      padding: 30px;
+      border-radius: 15px;
+    }
+
+    .price-card.premium {
+      border: 2px solid var(--blue);
+      position: relative;
+    }
+
+    .popular {
+      display: inline-block;
+      background: #edf1ff;
+      color: var(--blue);
+      font-size: 10px;
+      font-weight: 800;
+      padding: 5px 10px;
+      border-radius: 20px;
+      margin-bottom: 12px;
+    }
+
+    .price-card h3 {
+      font-size: 20px;
+      color: var(--dark);
+    }
+
+    .price {
+      font-size: 42px;
+      font-weight: 800;
+      color: var(--dark);
+      margin: 10px 0 2px;
+    }
+
+    .price-info {
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    .price-card ul {
+      list-style: none;
+      margin: 25px 0;
+    }
+
+    .price-card li {
+      font-size: 13px;
+      padding: 8px 0;
+      border-bottom: 1px solid #f0f2f6;
+    }
+
+    .price-card li::before {
+      content: "✓";
+      color: #218b53;
+      font-weight: 800;
+      margin-right: 10px;
+    }
+
+    .price-card .btn {
+      width: 100%;
+    }
+
+    .faq {
+      max-width: 720px;
+      margin: auto;
+    }
+
+    .faq-item {
+      border-bottom: 1px solid var(--border);
+      padding: 20px 0;
+    }
+
+    .faq-item h3 {
+      color: var(--dark);
+      font-size: 16px;
+      margin-bottom: 7px;
+    }
+
+    .faq-item p {
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .final-cta {
+      background: var(--dark);
+      color: white;
+      text-align: center;
+      padding: 75px 20px;
+    }
+
+    .final-cta h2 {
+      font-size: clamp(28px, 5vw, 42px);
+      margin-bottom: 14px;
+    }
+
+    .final-cta p {
+      color: #c3ccdc;
+      max-width: 570px;
+      margin: 0 auto 25px;
+      font-size: 14px;
+    }
+
+    footer {
+      background: #0b1220;
+      color: #aebbd0;
+      padding: 35px 0;
+      font-size: 12px;
+    }
+
+    .footer-content {
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 18px;
+      flex-wrap: wrap;
+    }
+
+    .footer-links a:hover {
+      color: white;
+    }
+
+    @media(max-width: 760px) {
+      .nav-links {
+        gap: 12px;
+        font-size: 12px;
+      }
+
+      .nav-links .nav-extra {
+        display: none;
+      }
+
+      .hero {
+        padding: 75px 0 65px;
+      }
+
+      .feature-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .stats {
+        grid-template-columns: 1fr;
+      }
+
+      .steps {
+        grid-template-columns: 1fr;
+        gap: 5px;
+      }
+
+      .pricing-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .section {
+        padding: 60px 0;
+      }
+    }
+
+    @media(max-width: 420px) {
+      .logo {
+        font-size: 20px;
+      }
+
+      .nav-login {
+        padding: 8px 11px;
+      }
+
+      .feature-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hero h1 {
+        font-size: 39px;
+      }
+
+      .dashboard-preview {
+        padding: 15px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <div class="container">
+    <nav>
+      <a class="logo" href="/">Home<span>Proof</span></a>
+
+      <div class="nav-links">
+        <a class="nav-extra" href="#features">Features</a>
+        <a class="nav-extra" href="#pricing">Pricing</a>
+        <a class="nav-login" href="/login">Sign in</a>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<main>
+
+  <section class="hero">
+    <div class="container">
+      <div class="hero-content">
+
+        <span class="eyebrow">YOUR HOME. YOUR RECORDS. YOUR PEACE OF MIND.</span>
+
+        <h1>Know what you own. <span>Protect what matters.</span></h1>
+
+        <p>
+          Keep track of your household belongings, photographs,
+          receipts and important records in one organized place.
+          Be better prepared when unexpected things happen.
+        </p>
+
+        <div class="hero-buttons">
+          <a href="#pricing" class="btn btn-primary">
+            Get started
+          </a>
+
+          <a href="#features" class="btn btn-outline">
+            Explore features
+          </a>
+        </div>
+
+        <div class="trust-line">
+          Designed for homeowners and renters in the USA, UK and Canada.
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+
+      <div class="section-heading">
+        <h2>Your entire home, better organized.</h2>
+        <p>
+          Keep important household information accessible
+          instead of scattered across different folders and devices.
+        </p>
+      </div>
+
+      <div class="dashboard-preview">
+
+        <div class="preview-top">
+          <h3>HomeProof Dashboard</h3>
+          <span class="preview-status">Product preview</span>
+        </div>
+
+        <div class="stats">
+
+          <div class="stat">
+            <small>Properties</small>
+            <strong>01</strong>
+          </div>
+
+          <div class="stat">
+            <small>Rooms</small>
+            <strong>06</strong>
+          </div>
+
+          <div class="stat">
+            <small>Items recorded</small>
+            <strong>124</strong>
+          </div>
+
+        </div>
+
+        <p class="preview-note">
+          Illustrative preview. Your actual dashboard will display your own records.
+        </p>
+
+      </div>
+
+    </div>
+  </section>
+
+  <section class="section features" id="features">
+    <div class="container">
+
+      <div class="section-heading">
+        <h2>Everything important in one place.</h2>
+        <p>
+          Practical tools to help you document and organize
+          your household possessions.
+        </p>
+      </div>
+
+      <div class="feature-grid">
+
+        <div class="feature">
+          <div class="feature-icon">🏠</div>
+          <h3>Room-by-room inventory</h3>
+          <p>
+            Organize your possessions by property, room and category.
+          </p>
+        </div>
+
+        <div class="feature">
+          <div class="feature-icon">📸</div>
+          <h3>Photo records</h3>
+          <p>
+            Keep photographs of your furniture, electronics and other belongings.
+          </p>
+        </div>
+
+        <div class="feature">
+          <div class="feature-icon">🧾</div>
+          <h3>Receipt storage</h3>
+          <p>
+            Organize purchase receipts, invoices and important documents.
+          </p>
+        </div>
+
+        <div class="feature">
+          <div class="feature-icon">💰</div>
+          <h3>Value tracking</h3>
+          <p>
+            Record purchase prices and estimated replacement values.
+          </p>
+        </div>
+
+        <div class="feature">
+          <div class="feature-icon">🔢</div>
+          <h3>Serial number records</h3>
+          <p>
+            Save identifying information for valuable possessions.
+          </p>
+        </div>
+
+        <div class="feature">
+          <div class="feature-icon">📄</div>
+          <h3>Evidence reports</h3>
+          <p>
+            Generate organized household inventory reports for your records.
+          </p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+
+      <div class="section-heading">
+        <h2>Get organized in three steps.</h2>
+        <p>Building your household inventory doesn't need to be complicated.</p>
+      </div>
+
+      <div class="steps">
+
+        <div class="step">
+          <div class="step-number">1</div>
+          <h3>Create your home</h3>
+          <p>Add your property and organize its rooms.</p>
+        </div>
+
+        <div class="step">
+          <div class="step-number">2</div>
+          <h3>Record your belongings</h3>
+          <p>Add photographs, descriptions, values and receipts.</p>
+        </div>
+
+        <div class="step">
+          <div class="step-number">3</div>
+          <h3>Keep your records</h3>
+          <p>Generate reports and maintain an organized evidence archive.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <section class="section pricing" id="pricing">
+    <div class="container">
+
+      <div class="section-heading">
+        <h2>Simple pricing. No monthly subscription.</h2>
+        <p>
+          Choose the plan that suits your household.
+          Pay once for the listed access.
+        </p>
+      </div>
+
+      <div class="pricing-grid">
+
+        <div class="price-card">
+
+          <h3>Basic</h3>
+          <div class="price">$10</div>
+          <p class="price-info">One-time payment</p>
+
+          <ul>
+            <li>One property</li>
+            <li>Room-by-room inventory</li>
+            <li>Photo records</li>
+            <li>Item value tracking</li>
+            <li>Basic PDF reports</li>
+          </ul>
+
+          <a href="/signup?plan=basic" class="btn btn-primary">
+            Choose Basic
+          </a>
+
+        </div>
+
+        <div class="price-card premium">
+
+          <span class="popular">BEST VALUE</span>
+
+          <h3>Premium</h3>
+          <div class="price">$20</div>
+          <p class="price-info">One-time payment</p>
+
+          <ul>
+            <li>Unlimited properties</li>
+            <li>Unlimited rooms and items</li>
+            <li>Photo and receipt vault</li>
+            <li>Warranty records</li>
+            <li>Serial number tracking</li>
+            <li>Family sharing</li>
+            <li>Advanced PDF and CSV reports</li>
+            <li>Priority support</li>
+          </ul>
+
+          <a href="/signup?plan=premium" class="btn btn-primary">
+            Choose Premium
+          </a>
+
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+
+      <div class="section-heading">
+        <h2>Frequently asked questions</h2>
+      </div>
+
+      <div class="faq">
+
+        <div class="faq-item">
+          <h3>Who is HomeProof for?</h3>
+          <p>
+            Homeowners, renters and families who want to maintain
+            organized records of their household possessions.
+          </p>
+        </div>
+
+        <div class="faq-item">
+          <h3>Is this an insurance company?</h3>
+          <p>
+            No. HomeProof is a household inventory and record
+            management tool. It does not sell insurance or guarantee
+            that an insurer will accept a particular report.
+          </p>
+        </div>
+
+        <div class="faq-item">
+          <h3>Do I pay monthly?</h3>
+          <p>
+            No. Our planned Basic and Premium packages use
+            one-time payments of $10 and $20 respectively.
+          </p>
+        </div>
+
+        <div class="faq-item">
+          <h3>Can I access HomeProof on my phone?</h3>
+          <p>
+            Yes. The application is being designed to work
+            on smartphones, tablets and computers through a browser.
+          </p>
+        </div>
+
+        <div class="faq-item">
+          <h3>Does HomeProof guarantee my data will never be lost?</h3>
+          <p>
+            No digital service can guarantee that. We are building
+            secure storage and backup capabilities, and users should
+            retain their own copies of important records.
+          </p>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <section class="final-cta">
+    <div class="container">
+
+      <h2>Start documenting what matters.</h2>
+
+      <p>
+        Your home contains things worth remembering.
+        Give those belongings the records and organization they deserve.
+      </p>
+
+      <a href="#pricing" class="btn btn-primary">
+        Explore plans
+      </a>
+
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="container">
+
+    <div class="footer-content">
+
+      <div>
+        <a class="logo" href="/" style="color:white">
+          Home<span>Proof</span>
+        </a>
+        <p style="margin-top:8px">
+          Know what you own. Protect what matters.
+        </p>
+        <p style="margin-top:10px">
+          © 2026 HomeProof. All rights reserved.
+        </p>
+      </div>
+
+      <div class="footer-links">
+        <a href="#features">Features</a>
+        <a href="#pricing">Pricing</a>
+        <a href="/privacy">Privacy</a>
+        <a href="/terms">Terms</a>
+        <a href="/login">Sign in</a>
+      </div>
+
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
