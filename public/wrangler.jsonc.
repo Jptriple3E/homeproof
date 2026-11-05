@@ -4,27 +4,23 @@
   "main": "src/index.js",
   "compatibility_date": "2026-11-05",
   "workers_dev": true,
-
   "assets": {
     "directory": "./public",
     "binding": "ASSETS"
   },
-
   "d1_databases": [
     {
       "binding": "DB",
       "database_name": "homeproof-db",
-      "database_id": "REPLACE_WITH_YOUR_D1_DATABASE_ID"
+      "database_id": "23d94287-0000-4710-b07a-149acb4009fa"
     }
   ],
-
   "r2_buckets": [
     {
       "binding": "FILES",
       "bucket_name": "homeproof-files"
     }
   ],
-
   "observability": {
     "enabled": true
   }
