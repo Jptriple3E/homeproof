@@ -1,0 +1,31 @@
+
+{
+  "name": "homeproof",
+  "main": "src/index.js",
+  "compatibility_date": "2026-11-05",
+  "workers_dev": true,
+
+  "assets": {
+    "directory": "./public",
+    "binding": "ASSETS"
+  },
+
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "homeproof-db",
+      "database_id": "REPLACE_WITH_YOUR_D1_DATABASE_ID"
+    }
+  ],
+
+  "r2_buckets": [
+    {
+      "binding": "FILES",
+      "bucket_name": "homeproof-files"
+    }
+  ],
+
+  "observability": {
+    "enabled": true
+  }
+}
